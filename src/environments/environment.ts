@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  context: location.protocol + '//' + location.hostname + ':' + location.port,
+  app_local: 'http://localhost:8080/pessoa-portal/',
 };
 
 /*
