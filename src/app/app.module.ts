@@ -10,19 +10,24 @@ import {PessoaService} from './core/service/pessoa.service';
 import {HttpClientModule} from '@angular/common/http';
 import { CadastroComponent } from './pessoa/cadastro/cadastro.component';
 import {FormsModule} from '@angular/forms';
+import {IMaskModule} from 'angular-imask';
+import {CustomCpfPipe, CustomDatePipe} from './core/pipe/custom.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PessoaComponent,
-    CadastroComponent
+    CadastroComponent,
+    CustomDatePipe,
+    CustomCpfPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    IMaskModule
   ],
   exports: [RouterModule],
   providers: [PessoaService],

@@ -1,38 +1,36 @@
-<div class="container" *ngIf="pessoas">
+<div class="container" >
   <h2>CADASTRO DE PESSOA <small>Softplan</small></h2>
 
-  <form class="pure-form">
+  <form>
+    <h4>Filtros</h4>
+    <button [routerLink]="['/cadastro']" type="button">Cadastrar Novo</button>
     <fieldset>
-      Nome<input [(ngModel)]="nome" name="nome">
-      CPF<input [(ngModel)]="cpf" name="cpf">
-      E=mail<input [(ngModel)]="email" name="email">
-      Data Nasc.<input [(ngModel)]="nascimento" name="nascimento">
+      Nome  <input [(ngModel)]="nome" name="nome">
+      CPF  <input [imask]="{mask: '000.000.000-00'}" [unmask]="true"  [(ngModel)]="cpf" name="cpf">
+      E-mail  <input [(ngModel)]="email" name="email">
+      Data Nasc.  <input [(ngModel)]="nascimento" name="nascimento" type="date">
 
-      <button type="submit" class="pure-button pure-button-primary">Filtrar</button>
+      <button type="submit" class="mat-button" (click)="byQuery()"><img src="assets/images/search.png"></button>
     </fieldset>
   </form>
 
-  <ul class="responsive-table">
+  <ul class="responsive-table" *ngIf="pessoas">
     <li class="table-header">
-      <div class="col col-1">Nome</div>
-      <div class="col col-2">CPF</div>
-      <div class="col col-3">Email</div>
-      <div class="col col-4">Data Nasc.</div>
-      <div class="col col-5">#</div>
+      <div class="col col-3">Nome</div>
+      <div class="col col-1">CPF</div>
+      <div class="col col-2">Email</div>
+      <div class="col col-1">Data Nasc.</div>
+      <div class="col col-1">#</div>
     </li>
 
     <li class="table-row" *ngFor="let item of pessoas">
-      <div class="col col-1">{{item.nome}}</div>
-      <div class="col col-2">{{item.cpf}}</div>
-      <div class="col col-3">{{item.email}}</div>
-      <div class="col col-4">{{item.nascimento}}</div>
-      <div class="col col-5">
-        <button [routerLink]="['/pessoa', item.id]" type="button" class="btn btn-default btn-sm"><i
-          class="fa fa-check"></i> Editar
-        </button>
-        <button (click)="remover(item.id)" type="button" class="btn btn-default btn-sm"><i
-          class="fa fa-check"></i> Remover
-        </button>
+      <div class="col col-3">{{item.nome}}</div>
+      <div class="col col-1">{{item.cpf | customCpf}}</div>
+      <div class="col col-2">{{item.email}}</div>
+      <div class="col col-1">{{item.nascimento | customDate}}</div>
+      <div class="col col-1">
+        <button (click)="editar(item.id)" [routerLink]="['/pessoa', item.id]" type="button"><img src="assets/images/edit.png"></button>
+        <button (click)="remover(item.id)" type="button" class="btn btn-default btn-sm"><img src="assets/images/trash.png"></button>
       </div>
     </li>
   </ul>
