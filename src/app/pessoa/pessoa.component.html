@@ -1,17 +1,26 @@
-<div class="container" >
+<div class="container">
   <h2>CADASTRO DE PESSOA <small>Softplan</small></h2>
 
-  <form>
-    <h4>Filtros</h4>
-    <button [routerLink]="['/cadastro']" type="button">Cadastrar Novo</button>
-    <fieldset>
-      Nome  <input [(ngModel)]="nome" name="nome">
-      CPF  <input [imask]="{mask: '000.000.000-00'}" [unmask]="true"  [(ngModel)]="cpf" name="cpf">
-      E-mail  <input [(ngModel)]="email" name="email">
-      Data Nasc.  <input [(ngModel)]="nascimento" name="nascimento" type="date">
+  <form class="mat-elevation-z24">
+    <div class="mat-grid-tile-header">
+      <h2 class="mat-title">Filtros</h2>
+    </div>
+    <div class="mat-table">
+      <div class="mat-tab-group">
+        <label class="mat-tab-label">Nome: </label>
+        <input [(ngModel)]="nome" name="nome" class="mat-stepper-vertical">
+        <label class="mat-tab-label"> CPF: </label>
+        <input [imask]="{mask: '000.000.000-00'}" [unmask]="true" [(ngModel)]="cpf" name="cpf" class="mat-stepper-vertical">
+        <label class="mat-tab-label"> E-mail: </label>
+        <input [(ngModel)]="email" name="email" class="mat-stepper-vertical">
+        <label class="mat-tab-label"> Data Nasc.: </label>
+        <input class="mat-icon" [(ngModel)]="nascimento" name="nascimento" type="date" class="mat-stepper-vertical">
+        <img src="assets/images/calendar.png">
+      </div>
 
-      <button type="submit" class="mat-button" (click)="byQuery()"><img src="assets/images/search.png"></button>
-    </fieldset>
+      <button class="mat-button mat-background-primary" [routerLink]="['/cadastro']" type="button">Cadastrar Novo</button>
+      <button class="mat-button" type="submit" (click)="byQuery()"><img src="assets/images/search.png"></button>
+    </div>
   </form>
 
   <ul class="responsive-table" *ngIf="pessoas">
@@ -29,9 +38,12 @@
       <div class="col col-2">{{item.email}}</div>
       <div class="col col-1">{{item.nascimento | customDate}}</div>
       <div class="col col-1">
-        <button (click)="editar(item.id)" [routerLink]="['/pessoa', item.id]" type="button"><img src="assets/images/edit.png"></button>
-        <button (click)="remover(item.id)" type="button" class="btn btn-default btn-sm"><img src="assets/images/trash.png"></button>
+        <button (click)="editar(item.id)" [routerLink]="['/pessoa', item.id]" type="button"><img
+          src="assets/images/edit.png"></button>
+        <button (click)="remover(item.id)" type="button"><img
+          src="assets/images/trash.png"></button>
       </div>
     </li>
   </ul>
 </div>
+
